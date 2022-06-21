@@ -1,7 +1,8 @@
-package kyle.mvvm
+package kyle.mvvm.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import kyle.mvvm.R
 import kyle.mvvm.utils.Logger
 
 class MainActivity : AppCompatActivity() {

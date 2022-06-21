@@ -11,7 +11,7 @@ import kotlin.reflect.KProperty
  *
  */
 class ViewBindingHelper<T : Any>(val fragment: Fragment) : ReadWriteProperty<Fragment, T> {
-    private var _binding: T? = null
+    private var binding: T? = null
 
     init {
         fragment.lifecycle.addObserver(object : DefaultLifecycleObserver {
@@ -19,7 +19,7 @@ class ViewBindingHelper<T : Any>(val fragment: Fragment) : ReadWriteProperty<Fra
                 fragment.viewLifecycleOwnerLiveData.observe(fragment) { viewLifecycleOwner ->
                     viewLifecycleOwner?.lifecycle?.addObserver(object : DefaultLifecycleObserver {
                         override fun onDestroy(owner: LifecycleOwner) {
-                            _binding = null
+                            binding = null
                         }
                     })
                 }
@@ -28,13 +28,13 @@ class ViewBindingHelper<T : Any>(val fragment: Fragment) : ReadWriteProperty<Fra
     }
 
     override fun getValue(thisRef: Fragment, property: KProperty<*>): T {
-        return _binding ?: throw IllegalStateException(
+        return binding ?: throw IllegalStateException(
             "should never call auto-cleared-value get when it might not be available"
         )
     }
 
     override fun setValue(thisRef: Fragment, property: KProperty<*>, value: T) {
-        _binding = value
+        binding = value
     }
 }
 
