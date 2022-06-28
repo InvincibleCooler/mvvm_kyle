@@ -7,27 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
     
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/edittext_book_query"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="책 이름을 입력하시오."
+        android:hint="도서 이름을 입력하시오."
         android:imeOptions="actionSearch"
         android:inputType="text"
         android:lines="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_book"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edittext_book_query"
-        tools:visibility="gone" />
     
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
@@ -37,7 +27,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edittext_book_query">
         
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="결과가 없습니다."
@@ -47,5 +37,14 @@
             app:layout_constraintTop_toTopOf="parent" />
     
     </androidx.constraintlayout.widget.ConstraintLayout>
+    
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_book"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edittext_book_query" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

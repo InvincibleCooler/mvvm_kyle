@@ -34,43 +34,48 @@ class BookSearchFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         log.info("onCreateView() savedInstanceState: $savedInstanceState")
 
-        binding = FragmentBookSearchBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+        binding = FragmentBookSearchBinding.inflate(inflater, container, false).apply {
+            // EditText
+            edittextBookQuery.setOnEditorActionListener { textView, actionId, _ ->
+                when (actionId) {
+                    EditorInfo.IME_ACTION_SEARCH,
+                    EditorInfo.IME_ACTION_DONE -> {
+                        val searchQuery = textView.textString()
+                        if (searchQuery.isEmpty()) {
+                            toastShort("검색어를 입력해주세요.")
+                            return@setOnEditorActionListener false
+                        }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        log.info("onViewCreated() savedInstanceState: $savedInstanceState")
-
-        // EditText
-        binding.edittextBookQuery.setOnEditorActionListener { textView, actionId, _ ->
-            when (actionId) {
-                EditorInfo.IME_ACTION_SEARCH,
-                EditorInfo.IME_ACTION_DONE -> {
-                    val searchQuery = textView.textString()
-                    if (searchQuery.isEmpty()) {
-                        toastShort("검색어를 입력해주세요.")
-                        return@setOnEditorActionListener false
+                        hideInputMethod(textView)
+                        viewModel.search(searchQuery)
                     }
-
-                    hideInputMethod(textView)
-                    viewModel.search(searchQuery)
                 }
+
+                false
             }
 
-            false
+            // RecyclerView
+            recyclerviewBook.adapter = BookAdapter()
         }
 
         viewModel.bookUiState.observe(viewLifecycleOwner) { uiState ->
             updateRecyclerView(uiState)
         }
+
+        return binding.root
     }
 
     private fun updateRecyclerView(uiState: BookUiState) {
         log.info("updateRecyclerView() uiState: $uiState")
 
-        binding.recyclerviewBook.visibility = when {
-            uiState.isEmptyResult() -> View.GONE
-            else -> View.VISIBLE
+        binding.recyclerviewBook.run {
+            visibility = when {
+                uiState.isEmptyResult() -> View.GONE
+                else -> View.VISIBLE
+            }
+
+            val bookAdapter = adapter as? BookAdapter ?: return
+            bookAdapter.submitList(uiState.books)
         }
     }
 }
