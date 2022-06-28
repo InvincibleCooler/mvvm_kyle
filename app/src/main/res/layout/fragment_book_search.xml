@@ -12,6 +12,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="책 이름을 입력하시오."
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:lines="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

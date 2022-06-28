@@ -29,8 +29,8 @@ annotation class MainDispatcher
 @Qualifier
 annotation class MainImmediateDispatcher
 
-@InstallIn(SingletonComponent::class)
 @Module
+@InstallIn(SingletonComponent::class)
 object CoroutinesModule {
 
     @DefaultDispatcher

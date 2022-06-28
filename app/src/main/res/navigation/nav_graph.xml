@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/fragment_main"
-        android:name="kyle.mvvm.ui.main.MainFragment"
+        android:name="kyle.mvvm.ui.book.BookSearchFragment"
         android:label="main fragment" />
 </navigation>

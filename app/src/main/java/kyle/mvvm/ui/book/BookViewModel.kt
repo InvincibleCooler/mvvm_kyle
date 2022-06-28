@@ -1,4 +1,4 @@
-package kyle.mvvm.ui.main
+package kyle.mvvm.ui.book
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
-import kyle.mvvm.data.main.MainRepository
+import kyle.mvvm.data.book.BookRepository
 import kyle.mvvm.di.IoDispatcher
 import kyle.mvvm.net.res.BookInfo
 import kyle.mvvm.utils.Category
@@ -24,12 +24,12 @@ data class BookUiState(
 fun BookUiState.isEmptyResult(): Boolean = books.isEmpty()
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
-    private val repository: MainRepository,
+class BookViewModel @Inject constructor(
+    private val repository: BookRepository,
     @IoDispatcher val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
     companion object {
-        private const val TAG = "MainViewModel"
+        private const val TAG = "BookViewModel"
     }
 
     private val log = Logger(TAG).apply {

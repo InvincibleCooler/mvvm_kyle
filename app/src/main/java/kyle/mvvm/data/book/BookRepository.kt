@@ -1,4 +1,4 @@
-package kyle.mvvm.data.main
+package kyle.mvvm.data.book
 
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +13,7 @@ import kyle.mvvm.utils.Logger
  * Copyright (C) 2022 Kakao corp. All rights reserved.
  *
  */
-class MainRepository @Inject constructor(
+class BookRepository @Inject constructor(
     private val serviceApi: ServiceApi
 ) : Repository {
     companion object {
