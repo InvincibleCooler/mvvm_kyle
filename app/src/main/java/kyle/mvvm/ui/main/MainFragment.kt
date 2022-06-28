@@ -37,8 +37,17 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         log.info("onViewCreated() savedInstanceState: $savedInstanceState")
 
-        viewModel.books.observe(viewLifecycleOwner) { list ->
-            log.debug("onViewCreated::books.observe() list size: ${list.size}")
+        viewModel.bookUiState.observe(viewLifecycleOwner) { uiState ->
+            updateRecyclerView(uiState)
+        }
+    }
+
+    private fun updateRecyclerView(uiState: BookUiState) {
+        log.info("updateRecyclerView() uiState: $uiState")
+
+        binding.recyclerviewBook.visibility = when {
+            uiState.isEmptyResult() -> View.GONE
+            else -> View.VISIBLE
         }
     }
 }

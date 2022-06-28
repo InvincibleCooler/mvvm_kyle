@@ -25,10 +25,10 @@ class MainRepository @Inject constructor(
         useThreadInfo = true
     }
 
-    val books: Flow<List<BookInfo>> = flow {
-        val bookList = serviceApi.getSearch("Kotlin").books ?: emptyList()
-        log.debug("books::flow() bookList: ${bookList.size}")
+    fun searchBooks(query: String): Flow<List<BookInfo>> = flow {
+        log.info("searchBooks() query: $query")
 
-        emit(bookList)
+        val bookList = serviceApi.getSearch(query).books ?: emptyList()
+        emit(bookList.also { log.debug("searchBooks() result: ${it.size}") })
     }
 }
