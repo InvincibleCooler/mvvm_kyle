@@ -1,5 +1,6 @@
 package kyle.mvvm.data.main
 
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kyle.mvvm.data.Repository
@@ -12,7 +13,7 @@ import kyle.mvvm.utils.Logger
  * Copyright (C) 2022 Kakao corp. All rights reserved.
  *
  */
-class MainRepository(
+class MainRepository @Inject constructor(
     private val serviceApi: ServiceApi
 ) : Repository {
     companion object {

@@ -8,7 +8,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
 
 
-class RequestClient(private val _headers: HashMap<String, String>?) {
+class RequestClient(private val _headers: HashMap<String, String>? = null) {
     companion object {
         private const val TAG = "RequestClient"
 

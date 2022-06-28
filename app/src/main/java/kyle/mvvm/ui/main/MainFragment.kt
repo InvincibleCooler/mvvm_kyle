@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import kyle.mvvm.data.main.MainRepository
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import kyle.mvvm.databinding.FragmentMainBinding
-import kyle.mvvm.net.RequestManager
 import kyle.mvvm.utils.Category
 import kyle.mvvm.utils.Logger
 import kyle.mvvm.utils.viewBinding
-import kyle.mvvm.extension.viewModels
 
+@AndroidEntryPoint
 class MainFragment : Fragment() {
     companion object {
         private const val TAG = "MainFragment"
@@ -23,10 +23,7 @@ class MainFragment : Fragment() {
         useThreadInfo = true
     }
 
-    private val viewModel: MainViewModel by lazy {
-        val serviceApi = RequestManager.getServiceApi()
-        viewModels(MainViewModel.Factory(MainRepository(serviceApi)))
-    }
+    private val viewModel: MainViewModel by viewModels()
 
     private var binding by viewBinding<FragmentMainBinding>()
 

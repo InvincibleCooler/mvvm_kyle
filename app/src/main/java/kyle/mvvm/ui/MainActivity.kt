@@ -2,9 +2,11 @@ package kyle.mvvm.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import dagger.hilt.android.AndroidEntryPoint
 import kyle.mvvm.R
 import kyle.mvvm.utils.Logger
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "MainActivity"

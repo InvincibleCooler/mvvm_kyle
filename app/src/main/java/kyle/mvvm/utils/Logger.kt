@@ -10,6 +10,7 @@ enum class Category {
     UI,
     Domain,
     Data,
+    Module,
     None
 }
 
