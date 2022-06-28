@@ -1,10 +1,10 @@
 package kyle.mvvm.data.main
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kyle.mvvm.data.Repository
-import kyle.mvvm.net.RequestManager
+import kyle.mvvm.net.ServiceApi
+import kyle.mvvm.net.res.BookInfo
 import kyle.mvvm.utils.Category
 import kyle.mvvm.utils.Logger
 
@@ -12,7 +12,9 @@ import kyle.mvvm.utils.Logger
  * Copyright (C) 2022 Kakao corp. All rights reserved.
  *
  */
-class MainRepository : Repository {
+class MainRepository(
+    private val serviceApi: ServiceApi
+) : Repository {
     companion object {
         private const val TAG = "MainRepository"
     }
@@ -22,12 +24,10 @@ class MainRepository : Repository {
         useThreadInfo = true
     }
 
-    fun testCode() {
-        log.info("testCode()")
+    val books: Flow<List<BookInfo>> = flow {
+        val bookList = serviceApi.getSearch("Kotlin").books ?: emptyList()
+        log.debug("books::flow() bookList: ${bookList.size}")
 
-        CoroutineScope(Dispatchers.IO).launch {
-            val res = RequestManager.getServiceApi().getSearch("kotlin", "0")
-            log.debug("testCode() res: $res")
-        }
+        emit(bookList)
     }
 }

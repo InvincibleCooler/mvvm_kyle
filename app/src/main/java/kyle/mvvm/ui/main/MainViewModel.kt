@@ -1,22 +1,21 @@
 package kyle.mvvm.ui.main
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import androidx.lifecycle.asLiveData
+import kotlinx.coroutines.flow.catch
 import kyle.mvvm.data.main.MainRepository
+import kyle.mvvm.net.res.BookInfo
 import kyle.mvvm.utils.Category
 import kyle.mvvm.utils.Logger
 
 
 class MainViewModel(
-    private val repository: MainRepository
+    repository: MainRepository
 ) : ViewModel() {
     companion object {
         private const val TAG = "MainViewModel"
-
-
     }
 
     private val log = Logger(TAG).apply {
@@ -24,21 +23,9 @@ class MainViewModel(
         useThreadInfo = true
     }
 
-    init {
-        log.info("init()")
-    }
-
-    override fun onCleared() {
-        log.info("onCleared()")
-
-        // 활동용이다 by 인리더
-    }
-
-    fun testCode() {
-        log.debug("testCode()")
-
-        repository.testCode()
-    }
+    val books: LiveData<List<BookInfo>> = repository.books
+        .catch { log.error("books error", it) }
+        .asLiveData()
 
     class Factory(
         private val repository: MainRepository

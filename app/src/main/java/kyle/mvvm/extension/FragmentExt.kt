@@ -1,4 +1,4 @@
-package kyle.mvvm.utils
+package kyle.mvvm.extension
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
