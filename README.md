@@ -22,5 +22,6 @@ paging3 (https://developer.android.com/topic/libraries/architecture/paging/v3-ov
 
 
 2차 개발 조건
+없다
 
 Hilt 사용해서 refactoring
